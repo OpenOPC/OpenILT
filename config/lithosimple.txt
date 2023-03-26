@@ -1,0 +1,8 @@
+KernelDir ./kernel
+KernelNum 24
+TargetDensity  0.225
+PrintThresh    0.5
+PrintSteepness 50.0
+DoseMax 1.02
+DoseMin 0.98
+DoseNom 1.00

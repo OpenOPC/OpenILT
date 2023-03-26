@@ -1,0 +1,7 @@
+group_0,partition_0,interface_position_0,group_1,partition_1,interface_position_1,unit_type,device_group,device_group_0,device_group_1,interface_qty
+0,0,0.0,0,6,0.0,1,1,1,1,360.0
+0,1,0.0,0,0,0.0,1,1,1,1,360.0
+0,2,0.0,0,3,0.0,1,1,1,1,360.0
+0,4,0.0,0,2,0.0,1,1,1,1,360.0
+0,5,0.0,0,4,0.0,1,1,1,1,360.0
+0,6,0.0,0,5,0.0,1,1,1,1,360.0

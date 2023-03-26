@@ -1,0 +1,14 @@
+Iterations 50
+TargetDensity 0.225
+SigmoidSteepness 4.0
+WeightEPE 0.5
+WeightPVBL2 1.0
+WeightPVBand 0.0
+StepSize 0.32
+
+TileSizeX 2048
+TileSizeY 2048
+OffsetX   512
+OffsetY   512
+ILTSizeX  1024
+ILTSizeY  1024

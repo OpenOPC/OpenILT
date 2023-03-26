@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2023-03-06">
+    <creator>NetworkX 3.0</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <attributes mode="static" class="edge">
+      <attribute id="8" title="attr_dict" type="string" />
+    </attributes>
+    <attributes mode="static" class="node">
+      <attribute id="0" title="area" type="long" />
+      <attribute id="1" title="x1" type="double" />
+      <attribute id="2" title="x2" type="double" />
+      <attribute id="3" title="y1" type="double" />
+      <attribute id="4" title="y2" type="double" />
+      <attribute id="5" title="x" type="double" />
+      <attribute id="6" title="y" type="double" />
+      <attribute id="7" title="color" type="string" />
+    </attributes>
+    <nodes>
+      <node id="1_5" label="1_5">
+        <attvalues>
+          <attvalue for="0" value="54" />
+          <attvalue for="1" value="12.0" />
+          <attvalue for="2" value="30.0" />
+          <attvalue for="3" value="15.0" />
+          <attvalue for="4" value="18.0" />
+          <attvalue for="5" value="21.0" />
+          <attvalue for="6" value="16.5" />
+          <attvalue for="7" value="#56ae57" />
+        </attvalues>
+      </node>
+      <node id="1_7" label="1_7">
+        <attvalues>
+          <attvalue for="0" value="54" />
+          <attvalue for="1" value="30.0" />
+          <attvalue for="2" value="48.0" />
+          <attvalue for="3" value="15.0" />
+          <attvalue for="4" value="18.0" />
+          <attvalue for="5" value="39.0" />
+          <attvalue for="6" value="16.5" />
+          <attvalue for="7" value="#acc2d9" />
+        </attvalues>
+      </node>
+      <node id="1_6" label="1_6">
+        <attvalues>
+          <attvalue for="0" value="54" />
+          <attvalue for="1" value="12.0" />
+          <attvalue for="2" value="30.0" />
+          <attvalue for="3" value="18.0" />
+          <attvalue for="4" value="21.0" />
+          <attvalue for="5" value="21.0" />
+          <attvalue for="6" value="19.5" />
+          <attvalue for="7" value="#56ae57" />
+        </attvalues>
+      </node>
+      <node id="1_8" label="1_8">
+        <attvalues>
+          <attvalue for="0" value="54" />
+          <attvalue for="1" value="30.0" />
+          <attvalue for="2" value="48.0" />
+          <attvalue for="3" value="18.0" />
+          <attvalue for="4" value="21.0" />
+          <attvalue for="5" value="39.0" />
+          <attvalue for="6" value="19.5" />
+          <attvalue for="7" value="#acc2d9" />
+        </attvalues>
+      </node>
+      <node id="2_0" label="2_0">
+        <attvalues>
+          <attvalue for="0" value="72" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="2" value="12.0" />
+          <attvalue for="3" value="30.0" />
+          <attvalue for="4" value="36.0" />
+          <attvalue for="5" value="6.0" />
+          <attvalue for="6" value="33.0" />
+          <attvalue for="7" value="#b2996e" />
+        </attvalues>
+      </node>
+      <node id="4_0" label="4_0">
+        <attvalues>
+          <attvalue for="0" value="270" />
+          <attvalue for="1" value="12.0" />
+          <attvalue for="2" value="30.0" />
+          <attvalue for="3" value="21.0" />
+          <attvalue for="4" value="36.0" />
+          <attvalue for="5" value="21.0" />
+          <attvalue for="6" value="28.5" />
+          <attvalue for="7" value="#b2996e" />
+        </attvalues>
+      </node>
+      <node id="0_0" label="0_0">
+        <attvalues>
+          <attvalue for="0" value="9" />
+          <attvalue for="1" value="30.0" />
+          <attvalue for="2" value="33.0" />
+          <attvalue for="3" value="33.0" />
+          <attvalue for="4" value="36.0" />
+          <attvalue for="5" value="31.5" />
+          <attvalue for="6" value="34.5" />
+          <attvalue for="7" value="#acc2d9" />
+        </attvalues>
+      </node>
+      <node id="1_9" label="1_9">
+        <attvalues>
+          <attvalue for="0" value="54" />
+          <attvalue for="1" value="30.0" />
+          <attvalue for="2" value="48.0" />
+          <attvalue for="3" value="21.0" />
+          <attvalue for="4" value="24.0" />
+          <attvalue for="5" value="39.0" />
+          <attvalue for="6" value="22.5" />
+          <attvalue for="7" value="#acc2d9" />
+        </attvalues>
+      </node>
+      <node id="3_0" label="3_0">
+        <attvalues>
+          <attvalue for="0" value="162" />
+          <attvalue for="1" value="30.0" />
+          <attvalue for="2" value="48.0" />
+          <attvalue for="3" value="24.0" />
+          <attvalue for="4" value="33.0" />
+          <attvalue for="5" value="39.0" />
+          <attvalue for="6" value="28.5" />
+          <attvalue for="7" value="#acc2d9" />
+        </attvalues>
+      </node>
+      <node id="1_1" label="1_1">
+        <attvalues>
+          <attvalue for="0" value="54" />
+          <attvalue for="1" value="12.0" />
+          <attvalue for="2" value="30.0" />
+          <attvalue for="3" value="3.0" />
+          <attvalue for="4" value="6.0" />
+          <attvalue for="5" value="21.0" />
+          <attvalue for="6" value="4.5" />
+          <attvalue for="7" value="#56ae57" />
+        </attvalues>
+      </node>
+      <node id="1_0" label="1_0">
+        <attvalues>
+          <attvalue for="0" value="54" />
+          <attvalue for="1" value="12.0" />
+          <attvalue for="2" value="30.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="4" value="3.0" />
+          <attvalue for="5" value="21.0" />
+          <attvalue for="6" value="1.5" />
+          <attvalue for="7" value="#56ae57" />
+        </attvalues>
+      </node>
+      <node id="1_2" label="1_2">
+        <attvalues>
+          <attvalue for="0" value="54" />
+          <attvalue for="1" value="12.0" />
+          <attvalue for="2" value="30.0" />
+          <attvalue for="3" value="6.0" />
+          <attvalue for="4" value="9.0" />
+          <attvalue for="5" value="21.0" />
+          <attvalue for="6" value="7.5" />
+          <attvalue for="7" value="#56ae57" />
+        </attvalues>
+      </node>
+      <node id="1_3" label="1_3">
+        <attvalues>
+          <attvalue for="0" value="54" />
+          <attvalue for="1" value="12.0" />
+          <attvalue for="2" value="30.0" />
+          <attvalue for="3" value="9.0" />
+          <attvalue for="4" value="12.0" />
+          <attvalue for="5" value="21.0" />
+          <attvalue for="6" value="10.5" />
+          <attvalue for="7" value="#56ae57" />
+        </attvalues>
+      </node>
+      <node id="1_4" label="1_4">
+        <attvalues>
+          <attvalue for="0" value="54" />
+          <attvalue for="1" value="12.0" />
+          <attvalue for="2" value="30.0" />
+          <attvalue for="3" value="12.0" />
+          <attvalue for="4" value="15.0" />
+          <attvalue for="5" value="21.0" />
+          <attvalue for="6" value="13.5" />
+          <attvalue for="7" value="#56ae57" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="1_5" target="1_7" id="0" weight="3">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 3.0, 'color': 0}" />
+        </attvalues>
+      </edge>
+      <edge source="1_5" target="1_4" id="1" weight="18">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 18.0, 'color': 1}" />
+        </attvalues>
+      </edge>
+      <edge source="1_5" target="1_6" id="2" weight="18">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 18.0, 'color': 1}" />
+        </attvalues>
+      </edge>
+      <edge source="1_7" target="1_8" id="3" weight="18">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 18.0, 'color': 1}" />
+        </attvalues>
+      </edge>
+      <edge source="1_6" target="1_8" id="4" weight="3">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 3.0, 'color': 0}" />
+        </attvalues>
+      </edge>
+      <edge source="1_6" target="4_0" id="5" weight="18">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 18.0, 'color': 1}" />
+        </attvalues>
+      </edge>
+      <edge source="1_8" target="1_9" id="6" weight="18">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 18.0, 'color': 1}" />
+        </attvalues>
+      </edge>
+      <edge source="2_0" target="4_0" id="7" weight="6">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 6.0, 'color': 0}" />
+        </attvalues>
+      </edge>
+      <edge source="4_0" target="0_0" id="8" weight="3">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 3.0, 'color': 0}" />
+        </attvalues>
+      </edge>
+      <edge source="4_0" target="1_9" id="9" weight="3">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 3.0, 'color': 0}" />
+        </attvalues>
+      </edge>
+      <edge source="4_0" target="3_0" id="10" weight="9">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 9.0, 'color': 0}" />
+        </attvalues>
+      </edge>
+      <edge source="0_0" target="3_0" id="11" weight="3">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 3.0, 'color': 1}" />
+        </attvalues>
+      </edge>
+      <edge source="1_9" target="3_0" id="12" weight="18">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 18.0, 'color': 1}" />
+        </attvalues>
+      </edge>
+      <edge source="1_1" target="1_0" id="13" weight="18">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 18.0, 'color': 1}" />
+        </attvalues>
+      </edge>
+      <edge source="1_1" target="1_2" id="14" weight="18">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 18.0, 'color': 1}" />
+        </attvalues>
+      </edge>
+      <edge source="1_2" target="1_3" id="15" weight="18">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 18.0, 'color': 1}" />
+        </attvalues>
+      </edge>
+      <edge source="1_3" target="1_4" id="16" weight="18">
+        <attvalues>
+          <attvalue for="8" value="{'Weight': 18.0, 'color': 1}" />
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>

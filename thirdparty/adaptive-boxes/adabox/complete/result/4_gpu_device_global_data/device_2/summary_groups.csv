@@ -1,0 +1,3 @@
+n_group,n_partitions,num_div_y,num_div_x,device_group
+0,1,120.0,240.0,2
+1,1,300.0,360.0,2
