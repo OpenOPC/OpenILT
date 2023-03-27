@@ -377,7 +377,7 @@ This setting is more challenging than the settings in some existing works.
 If our works contribute to your research, you may cite our website and papers. 
 ```text
 @MISC{OPC:OpenILT,
-  author = {Su Zheng, Yuzhe Ma, Binwu Zhu, Guojin Chen, Wenqian Zhao, Shuo Yin, Ziyang Yu, Bei Yu},
+  author = {Zheng, Su and Ma, Yuzhe and Zhu, Binwu and Chen,Guojin and Zhao, Wenqian and Yin, Shuo and Yu, Ziyang and Yu, Bei},
   title = {OpenILT: An Open-source Platform for Inverse Lithography Technology Research},
   year = {2023},
   publisher = {GitHub},
