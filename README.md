@@ -378,11 +378,11 @@ If our works contribute to your research, you may cite our website and papers.
 ```text
 @MISC{OPC:OpenILT,
   author = {Zheng, Su and Ma, Yuzhe and Zhu, Binwu and Chen,Guojin and Zhao, Wenqian and Yin, Shuo and Yu, Ziyang and Yu, Bei},
-  title = {OpenILT: An Open-source Platform for Inverse Lithography Technology Research},
+  title = {OpenILT: An Open-source Platform for Inverse Lithography Technique Research},
   year = {2023},
   publisher = {GitHub},
   journal = {GitHub repository},
-  howpublished = {\url{https://github.com/shelljane/OpenILT}}
+  howpublished = {\url{https://github.com/OpenOPC/OpenILT/}}
 }
 ```
 
