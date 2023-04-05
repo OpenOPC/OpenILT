@@ -105,7 +105,7 @@ It aims at optimizing the carefully designed objective function and adjusting th
 A variety of attempts have been made in ILT to improve both the printed pattern fidelity and the process robustness.
 Representative works on ILT include: 
 
-(1) Numerical methods: MOSAIC [1], GPU-LevelSet [2,3], CTM-SRAF [4], etc. 
+(1) Numerical methods: MOSAIC [1], GPU-LevelSet [2,3], CTM-SRAF [4], AdaOPC [12], etc. 
 
 (2) GAN-OPC [5,6], Neural-ILT [7,8], DAMO [9,10], Devel-Set [11], etc. 
 
@@ -371,6 +371,7 @@ This setting is more challenging than the settings in some existing works.
 
 [11] Guojin Chen, Ziyang Yu, Hongduo Liu, Yuzhe Ma, Bei Yu, “DevelSet: Deep Neural Level Set for Instant Mask optimization”, IEEE/ACM International Conference on Computer-Aided Design (ICCAD), Nov. 1–4, 2021. 
 
+[12] Wenqian Zhao, Xufeng Yao, Ziyang Yu, Guojin Chen, Yuzhe Ma, Bei Yu, Martin Wong, “AdaOPC: A Self-Adaptive Mask Optimization Framework For Real Design Patterns”, IEEE/ACM International Conference on Computer-Aided Design (ICCAD), San Diego, Oct. 30–Nov. 3, 2022. 
 
 ## Note
 
