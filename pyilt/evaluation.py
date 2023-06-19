@@ -265,7 +265,7 @@ if __name__ == "__main__":
 
     mask = cv2.imread(maskfile)[:, :, 0] / 255
     mask = cv2.resize(mask, (2048, 2048))
-    if targetfile[:-4] == ".png": 
+    if targetfile[-4:] == ".png": 
         target = cv2.imread(targetfile)[:, :, 0] / 255
         target = cv2.resize(target, (2048, 2048))
     else: 
