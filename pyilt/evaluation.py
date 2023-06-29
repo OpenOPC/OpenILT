@@ -255,6 +255,20 @@ class ShotCounter:
             rectangles.extend(rects)
         return len(rectangles)
 
+def evaluate(mask, target, litho, scale=1, shots=False, verbose=False): 
+    test = Basic(litho, 0.5)
+    epeCheck = EPEChecker(litho, 0.5)
+    shotCount = ShotCounter(litho, 0.5)
+
+    l2, pvb = test.run(mask, target, scale=scale)
+    epeIn, epeOut = epeCheck.run(mask, target, scale=scale)
+    epe = epeIn + epeOut
+    nshot = shotCount.run(mask, shape=(512, 512)) if shots else -1
+    if verbose: 
+        print(f"[{maskfile}]: L2 {l2:.0f}; PVBand {pvb:.0f}; EPE {epe:.0f}; Shot: {nshot:.0f}")
+
+    return l2, pvb, epe, nshot
+
 if __name__ == "__main__": 
     targetfile = sys.argv[1]
     maskfile = sys.argv[2]

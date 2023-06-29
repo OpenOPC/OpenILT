@@ -63,8 +63,8 @@ class SimpleILT:
         params = params.clone().detach().requires_grad_(True)
 
         # Optimizer 
-        # opt = optim.SGD([params], lr=1.6e0)
-        opt = optim.Adam([params], lr=self._config["StepSize"])
+        opt = optim.SGD([params], lr=self._config["StepSize"])
+        # opt = optim.Adam([params], lr=self._config["StepSize"])
 
         # Optimization process
         lossMin, l2Min, pvbMin = 1e12, 1e12, 1e12
@@ -164,9 +164,6 @@ def serial():
     cfg   = SimpleCfg("./config/simpleilt2048.txt")
     litho = lithosim.LithoSim("./config/lithosimple.txt")
     solver = SimpleILT(cfg, litho)
-    test = evaluation.Basic(litho, 0.5)
-    epeCheck = evaluation.EPEChecker(litho, 0.5)
-    shotCount = evaluation.ShotCounter(litho, 0.5)
     for idx in range(1, 11): 
         design = glp.Design(f"./benchmark/ICCAD2013/M1_test{idx}.glp", down=SCALE)
         design.center(cfg["TileSizeX"], cfg["TileSizeY"], cfg["OffsetX"], cfg["OffsetY"])
@@ -179,10 +176,7 @@ def serial():
         ref = glp.Design(f"./benchmark/ICCAD2013/M1_test{idx}.glp", down=1)
         ref.center(cfg["TileSizeX"]*SCALE, cfg["TileSizeY"]*SCALE, cfg["OffsetX"]*SCALE, cfg["OffsetY"]*SCALE)
         target, params = initializer.PixelInit().run(ref, cfg["TileSizeX"]*SCALE, cfg["TileSizeY"]*SCALE, cfg["OffsetX"]*SCALE, cfg["OffsetY"]*SCALE)
-        l2, pvb = test.run(bestMask, target, scale=SCALE)
-        epeIn, epeOut = epeCheck.run(bestMask, target, scale=SCALE)
-        epe = epeIn + epeOut
-        shot = shotCount.run(bestMask, shape=(512, 512))
+        l2, pvb, epe, shot = evaluation.evaluate(bestMask, target, litho, scale=SCALE, shots=True)
         cv2.imwrite(f"./tmp/MOSAIC_test{idx}.png", (bestMask * 255).detach().cpu().numpy())
 
         print(f"[Testcase {idx}]: L2 {l2:.0f}; PVBand {pvb:.0f}; EPE {epe:.0f}; Shot: {shot:.0f}; SolveTime: {runtime:.2f}s")
@@ -199,35 +193,3 @@ def serial():
 if __name__ == "__main__": 
     serial()
     # parallel()
-
-
-'''
-fast backward (simple lithosim): 
-[Testcase 1]: L2 43408; PVBand 52281; EPE 3; Shot: 723.0; SolveTime: 2.50s
-[Testcase 2]: L2 35326; PVBand 41865; EPE 2; Shot: 623.0; SolveTime: 2.24s
-[Testcase 3]: L2 75428; PVBand 78805; EPE 43; Shot: 873.0; SolveTime: 2.24s
-[Testcase 4]: L2 13649; PVBand 22112; EPE 2; Shot: 781.0; SolveTime: 2.24s
-[Testcase 5]: L2 37330; PVBand 54977; EPE 2; Shot: 604.0; SolveTime: 2.23s
-[Testcase 6]: L2 35711; PVBand 51036; EPE 0; Shot: 659.0; SolveTime: 2.24s
-[Testcase 7]: L2 29566; PVBand 44576; EPE 0; Shot: 555.0; SolveTime: 2.23s
-[Testcase 8]: L2 14327; PVBand 20727; EPE 0; Shot: 876.0; SolveTime: 2.24s
-[Testcase 9]: L2 45347; PVBand 64063; EPE 0; Shot: 617.0; SolveTime: 2.24s
-[Testcase 10]: L2 8404; PVBand 16685; EPE 0; Shot: 809.0; SolveTime: 2.24s
-[Result]: L2 33850; PVBand 44713; EPE 5.2; Shot 712.0; SolveTime 2.26s
-'''
-
-'''
-exact backward (exact lithosim): 
-[Testcase 1]: L2 41326; PVBand 51874; EPE 4; Shot: 715.0; SolveTime: 8.61s
-[Testcase 2]: L2 31828; PVBand 41134; EPE 0; Shot: 595.0; SolveTime: 8.35s
-[Testcase 3]: L2 71733; PVBand 81149; EPE 40; Shot: 781.0; SolveTime: 8.36s
-[Testcase 4]: L2 12433; PVBand 23680; EPE 1; Shot: 714.0; SolveTime: 8.37s
-[Testcase 5]: L2 34884; PVBand 56069; EPE 1; Shot: 558.0; SolveTime: 8.36s
-[Testcase 6]: L2 34928; PVBand 50434; EPE 0; Shot: 591.0; SolveTime: 8.35s
-[Testcase 7]: L2 26494; PVBand 44393; EPE 0; Shot: 480.0; SolveTime: 8.36s
-[Testcase 8]: L2 12306; PVBand 20760; EPE 0; Shot: 782.0; SolveTime: 8.37s
-[Testcase 9]: L2 39526; PVBand 65917; EPE 0; Shot: 644.0; SolveTime: 8.35s
-[Testcase 10]: L2 8528; PVBand 16667; EPE 0; Shot: 647.0; SolveTime: 8.36s
-[Result]: L2 31399; PVBand 45208; EPE 4.6; Shot 650.7; SolveTime 8.38s
-'''
-
