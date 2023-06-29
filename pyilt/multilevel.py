@@ -158,7 +158,7 @@ if __name__ == "__main__":
         logMid = f"L2 {l2:.0f}; PVBand {pvb:.0f}; EPE {epe:.0f}"
         # -> Evaluation
         target, params = initializer.PixelInit().run(ref, cfgMid["TileSizeX"]*ScaleMid, cfgMid["TileSizeY"]*ScaleMid, cfgMid["OffsetX"]*ScaleMid, cfgMid["OffsetY"]*ScaleMid)
-        l2, pvb, epe, shot = evaluation.evaluate(bestMask, target, litho, scale=ScaleMid, shots=False)
+        l2, pvb, epe, shot = evaluation.evaluate(bestMask, target, litho, scale=ScaleMid, shots=True)
         logMid = f"L2 {l2:.0f}; PVBand {pvb:.0f}; EPE {epe:.0f}; Shots: {shot:.0f}"
         # Print Information
         print(f"[Testcase {idx}]: Low: {logLow} -> Mid: {logMid}; Runtime: {runtime:.2f}s")
