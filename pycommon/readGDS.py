@@ -42,8 +42,8 @@ class PolygonGDS:
                 if frX == toX: # vertical
                     if frY > toY: # downward
                         if typeLast is None: 
-                            points1.append([frX - halfW, frY])
-                            points2.append([frX + halfW, frY])
+                            points1.append([frX - halfW, frY - halfW])
+                            points2.append([frX + halfW, frY - halfW])
                         elif typeLast == "left": 
                             points1.append([frX - halfW, frY - halfW])
                             points2.append([frX + halfW, frY + halfW])
@@ -58,12 +58,12 @@ class PolygonGDS:
                         typeLast = "down"
                         
                         if idx + 1 == len(points0) - 1: 
-                            points1.append([toX - halfW, toY])
-                            points2.append([toX + halfW, toY])
+                            points1.append([toX - halfW, toY - halfW])
+                            points2.append([toX + halfW, toY - halfW])
                     else: # upward
                         if typeLast is None: 
-                            points1.append([frX + halfW, frY])
-                            points2.append([frX - halfW, frY])
+                            points1.append([frX + halfW, frY - halfW])
+                            points2.append([frX - halfW, frY - halfW])
                         elif typeLast == "left": 
                             points1.append([frX + halfW, frY - halfW])
                             points2.append([frX - halfW, frY + halfW])
@@ -78,13 +78,13 @@ class PolygonGDS:
                         typeLast = "up"
                         
                         if idx + 1 == len(points0) - 1: 
-                            points1.append([toX + halfW, toY])
-                            points2.append([toX - halfW, toY])
+                            points1.append([toX + halfW, toY + halfW])
+                            points2.append([toX - halfW, toY + halfW])
                 elif frY == toY: # horizontal
                     if frX > toX: # leftward
                         if typeLast is None: 
-                            points1.append([frX, frY - halfW])
-                            points2.append([frX, frY + halfW])
+                            points1.append([frX - halfW, frY - halfW])
+                            points2.append([frX - halfW, frY + halfW])
                         elif typeLast == "down": 
                             points1.append([frX - halfW, frY - halfW])
                             points2.append([frX + halfW, frY + halfW])
@@ -99,8 +99,8 @@ class PolygonGDS:
                         typeLast = "left"
                         
                         if idx + 1 == len(points0) - 1: 
-                            points1.append([toX, toY - halfW])
-                            points2.append([toX, toY + halfW])
+                            points1.append([toX - halfW, toY - halfW])
+                            points2.append([toX - halfW, toY + halfW])
                     else: # rightward
                         if typeLast is None: 
                             points1.append([frX, frY + halfW])
@@ -119,8 +119,8 @@ class PolygonGDS:
                         typeLast = "right"
                         
                         if idx + 1 == len(points0) - 1: 
-                            points1.append([toX, toY + halfW])
-                            points2.append([toX, toY - halfW])
+                            points1.append([toX + halfW, toY + halfW])
+                            points2.append([toX + halfW, toY - halfW])
                 else: 
                     assert False, "Unsupported path!"
             assert len(points1) == len(points2)
