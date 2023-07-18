@@ -41,86 +41,166 @@ class PolygonGDS:
                 toX, toY = points0[idx+1]
                 if frX == toX: # vertical
                     if frY > toY: # downward
+                        point1 = None
+                        point2 = None
                         if typeLast is None: 
-                            points1.append([frX - halfW, frY - halfW])
-                            points2.append([frX + halfW, frY - halfW])
+                            point1 = [frX - halfW, frY + halfW]
+                            point2 = [frX + halfW, frY + halfW]
                         elif typeLast == "left": 
-                            points1.append([frX - halfW, frY - halfW])
-                            points2.append([frX + halfW, frY + halfW])
+                            point1 = [frX - halfW, frY + halfW]
+                            point2 = [frX + halfW, frY - halfW]
                         elif typeLast == "right": 
-                            points1.append([frX - halfW, frY + halfW])
-                            points2.append([frX + halfW, frY - halfW])
+                            point1 = [frX - halfW, frY - halfW]
+                            point2 = [frX + halfW, frY + halfW]
                         elif typeLast == "down": 
                             pass
                         else: 
                             print(self._element.xy)
                             assert False, f"Unsupported direction! Last direction is {typeLast}"
+                        
+                        if typeLast == "down": 
+                            pass
+                        elif typeLast is None or point1[1] == points1[-1][1]: 
+                            points1.append(point1)
+                            points2.append(point2)
+                        else: 
+                            assert point1[1] == points2[-1][1]
+                            points1.append(point2)
+                            points2.append(point1)
+                            
                         typeLast = "down"
                         
                         if idx + 1 == len(points0) - 1: 
-                            points1.append([toX - halfW, toY - halfW])
-                            points2.append([toX + halfW, toY - halfW])
+                            point1 = [toX - halfW, toY - halfW]
+                            point2 = [toX + halfW, toY - halfW]
+                            if typeLast is None or point1[0] == points1[-1][0]: 
+                                points1.append(point1)
+                                points2.append(point2)
+                            else: 
+                                assert point1[0] == points2[-1][0]
+                                points1.append(point2)
+                                points2.append(point1)
                     else: # upward
+                        point1 = None
+                        point2 = None
                         if typeLast is None: 
-                            points1.append([frX + halfW, frY - halfW])
-                            points2.append([frX - halfW, frY - halfW])
+                            point1 = [frX + halfW, frY - halfW]
+                            point2 = [frX - halfW, frY - halfW]
                         elif typeLast == "left": 
-                            points1.append([frX + halfW, frY - halfW])
-                            points2.append([frX - halfW, frY + halfW])
+                            point1 = [frX + halfW, frY + halfW]
+                            point2 = [frX - halfW, frY - halfW]
                         elif typeLast == "right": 
-                            points1.append([frX + halfW, frY + halfW])
-                            points2.append([frX - halfW, frY - halfW])
+                            point1 = [frX + halfW, frY - halfW]
+                            point2 = [frX - halfW, frY + halfW]
                         elif typeLast == "up": 
                             pass
                         else: 
                             print(self._element.xy)
                             assert False, f"Unsupported direction! Last direction is {typeLast}"
+                        
+                        if typeLast == "up": 
+                            pass
+                        elif typeLast is None or point1[1] == points1[-1][1]: 
+                            points1.append(point1)
+                            points2.append(point2)
+                        else: 
+                            assert point1[1] == points2[-1][1]
+                            points1.append(point2)
+                            points2.append(point1)
+
                         typeLast = "up"
                         
                         if idx + 1 == len(points0) - 1: 
-                            points1.append([toX + halfW, toY + halfW])
-                            points2.append([toX - halfW, toY + halfW])
+                            point1 = [toX + halfW, toY + halfW]
+                            point2 = [toX - halfW, toY + halfW]
+                            if typeLast is None or point1[0] == points1[-1][0]: 
+                                points1.append(point1)
+                                points2.append(point2)
+                            else: 
+                                assert point1[0] == points2[-1][0]
+                                points1.append(point2)
+                                points2.append(point1)
                 elif frY == toY: # horizontal
                     if frX > toX: # leftward
+                        point1 = None
+                        point2 = None
                         if typeLast is None: 
-                            points1.append([frX - halfW, frY - halfW])
-                            points2.append([frX - halfW, frY + halfW])
+                            point1 = [frX + halfW, frY - halfW]
+                            point2 = [frX + halfW, frY + halfW]
                         elif typeLast == "down": 
-                            points1.append([frX - halfW, frY - halfW])
-                            points2.append([frX + halfW, frY + halfW])
+                            point1 = [frX + halfW, frY - halfW]
+                            point2 = [frX - halfW, frY + halfW]
                         elif typeLast == "up": 
-                            points1.append([frX + halfW, frY - halfW])
-                            points2.append([frX - halfW, frY + halfW])
+                            point1 = [frX - halfW, frY - halfW]
+                            point2 = [frX + halfW, frY + halfW]
                         elif typeLast == "left": 
                             pass
                         else: 
                             print(self._element.xy)
                             assert False, f"Unsupported direction! Last direction is {typeLast}"
+                        
+                        if typeLast == "left": 
+                            pass
+                        elif typeLast is None or point1[0] == points1[-1][0]: 
+                            points1.append(point1)
+                            points2.append(point2)
+                        else: 
+                            assert point1[0] == points2[-1][0]
+                            points1.append(point2)
+                            points2.append(point1)
+
                         typeLast = "left"
                         
                         if idx + 1 == len(points0) - 1: 
-                            points1.append([toX - halfW, toY - halfW])
-                            points2.append([toX - halfW, toY + halfW])
+                            point1 = [toX - halfW, toY - halfW]
+                            point2 = [toX - halfW, toY + halfW]
+                            if typeLast is None or point1[1] == points1[-1][1]: 
+                                points1.append(point1)
+                                points2.append(point2)
+                            else: 
+                                assert point1[1] == points2[-1][1]
+                                points1.append(point2)
+                                points2.append(point1)
                     else: # rightward
+                        point1 = None
+                        point2 = None
                         if typeLast is None: 
-                            points1.append([frX, frY + halfW])
-                            points2.append([frX, frY - halfW])
+                            point1 = [frX - halfW, frY + halfW]
+                            point2 = [frX - halfW, frY - halfW]
                         elif typeLast == "down": 
-                            points1.append([frX - halfW, frY + halfW])
-                            points2.append([frX + halfW, frY - halfW])
+                            point1 = [frX + halfW, frY + halfW]
+                            point2 = [frX - halfW, frY - halfW]
                         elif typeLast == "up": 
-                            points1.append([frX + halfW, frY + halfW])
-                            points2.append([frX - halfW, frY - halfW])
+                            point1 = [frX - halfW, frY + halfW]
+                            point2 = [frX + halfW, frY - halfW]
                         elif typeLast == "right": 
                             pass
                         else: 
                             print(self._element.xy)
                             assert False, f"Unsupported direction! Last direction is {typeLast}"
+                        
+                        if typeLast == "right": 
+                            pass
+                        elif typeLast is None or point1[0] == points1[-1][0]: 
+                            points1.append(point1)
+                            points2.append(point2)
+                        else: 
+                            assert point1[0] == points2[-1][0]
+                            points1.append(point2)
+                            points2.append(point1)
+
                         typeLast = "right"
                         
                         if idx + 1 == len(points0) - 1: 
-                            points1.append([toX + halfW, toY + halfW])
-                            points2.append([toX + halfW, toY - halfW])
+                            point1 = [toX + halfW, toY + halfW]
+                            point2 = [toX + halfW, toY - halfW]
+                            if typeLast is None or point1[1] == points1[-1][1]: 
+                                points1.append(point1)
+                                points2.append(point2)
+                            else: 
+                                assert point1[1] == points2[-1][1]
+                                points1.append(point2)
+                                points2.append(point1)
                 else: 
                     assert False, "Unsupported path!"
             assert len(points1) == len(points2)
@@ -600,8 +680,8 @@ if __name__ == "__main__":
     # reader = ReaderGDS("tmp/layout.gds")
     # reader.draw(0.02, 200, layers=(10, ), center=False, noSRef=False)
 
-    basedir = "tmp/gds_diff/gcd/"
-    filename = "6_final.gds"
+    basedir = "work/"
+    filename = "gcd.gds"
     reader = ReaderGDS(basedir + filename)
     structs = reader.structs
     for name, struct in structs.items(): 
@@ -610,9 +690,9 @@ if __name__ == "__main__":
             print(f"SRAF encountered: {name}")
             struct = struct.flatten()
             # struct.draw(scale=0.1, layers=(1, ))
-            struct.exportGLP(f"{basedir}/{name}.glp", scale=0.1, layers=(1, ))
-        else: 
+            struct.exportGLP(f"{basedir}/{name}.glp", scale=0.1, layers=(11, ))
+        # else: 
             # struct.draw(layers=(1, ))
-            struct.exportGLP(f"{basedir}/{name}.glp", scale=0.1, layers=(1, ))
+            # struct.exportGLP(f"{basedir}/{name}.glp", scale=0.1, layers=(11, ))
 
 
