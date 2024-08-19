@@ -142,6 +142,8 @@ if __name__ == "__main__":
     lenUniform = 32
 
     for index in range(1, 11): 
+        StepSize = STEPSIZE
+
         design = glp.Design(f"./benchmark/ICCAD2013/M1_test{index}.glp", down=SCALE)
         design.center(size[0], size[1], 0, 0)
         polygons = design.polygons
@@ -216,15 +218,15 @@ if __name__ == "__main__":
             for idx, elems in enumerate(flattened): 
                 assert hmoves[idx] == 0 or vmoves[idx] == 0
                 if hmoves[idx] != 0: 
-                    node0 = (flattened[idx][0][0] + round(STEPSIZE * hmoves[idx]), flattened[idx][0][1])
-                    node1 = (flattened[idx][1][0] + round(STEPSIZE * hmoves[idx]), flattened[idx][1][1])
+                    node0 = (flattened[idx][0][0] + round(StepSize * hmoves[idx]), flattened[idx][0][1])
+                    node1 = (flattened[idx][1][0] + round(StepSize * hmoves[idx]), flattened[idx][1][1])
                     if abs(node0[0] - reference[idx][0][0]) <= MAXDIST: 
                         flattened[idx][0] = node0
                     if abs(node1[0] - reference[idx][1][0]) <= MAXDIST: 
                         flattened[idx][1] = node1
                 if vmoves[idx] != 0: 
-                    node0 = (flattened[idx][0][0], flattened[idx][0][1] + round(STEPSIZE * vmoves[idx]))
-                    node1 = (flattened[idx][1][0], flattened[idx][1][1] + round(STEPSIZE * vmoves[idx]))
+                    node0 = (flattened[idx][0][0], flattened[idx][0][1] + round(StepSize * vmoves[idx]))
+                    node1 = (flattened[idx][1][0], flattened[idx][1][1] + round(StepSize * vmoves[idx]))
                     if abs(node0[1] - reference[idx][0][1]) <= MAXDIST: 
                         flattened[idx][0] = node0
                     if abs(node1[1] - reference[idx][1][1]) <= MAXDIST: 
@@ -238,7 +240,7 @@ if __name__ == "__main__":
                 bigminBest = bigmin
 
             if step > 0 and step % DECAY == 0: 
-                STEPSIZE /= 2
+                StepSize /= 2
 
         target = target.detach().cpu().numpy()
         modified = modified.detach().cpu().numpy()
