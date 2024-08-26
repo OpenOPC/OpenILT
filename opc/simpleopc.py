@@ -42,7 +42,7 @@ def flattenSegments(segments):
     return linked, results
 
 
-def cropSegments(segments, layer=11, dbu=1e-3, sizeX=1200, sizeY=1600, strideX=570, strideY=700): 
+def cropSegments(segments, layer=11, dbu=1e-3, sizeX=1200, sizeY=1600, strideX=570, strideY=700, fromzero=True): 
     polygons = []
     for dissected in segments: 
         reconstr = poly.segs2poly(dissected)
@@ -50,8 +50,8 @@ def cropSegments(segments, layer=11, dbu=1e-3, sizeX=1200, sizeY=1600, strideX=5
     print(f"In total {len(polygons)} shapes")
 
     reconstr = layout.createLayout(polygons, layer=layer, dbu=dbu)
-    crops, coords = layout.getCrops(reconstr, layer=layer, sizeX=sizeX, sizeY=sizeY, 
-                                    strideX=strideX, strideY=strideY, maxnum=None, verbose=False)
+    crops, coords = layout.getCrops(reconstr, layer=layer, sizeX=sizeX, sizeY=sizeY, strideX=strideX, strideY=strideY, 
+                                    maxnum=None, fromzero=fromzero, verbose=False)
     print(f"In total {len(crops)} crops")
 
     return crops, coords
@@ -60,7 +60,7 @@ def cropSegments(segments, layer=11, dbu=1e-3, sizeX=1200, sizeY=1600, strideX=5
 STEPS = 8
 DECAY = 4
 STEPSIZE = 8
-BATCHSIZE = 16
+BATCHSIZE = 64
 MAXDIST = 24
 SCALE = 0.125
 if __name__ == "__main__": 
@@ -73,6 +73,8 @@ if __name__ == "__main__":
     linked, flattened = flattenSegments(segments)
     linkedEPE = copy.deepcopy(linked)
     refsEPE = copy.deepcopy(flattened)
+
+    stepsize = STEPSIZE
 
     features = []
     for idx, segment in enumerate(refsEPE): 
@@ -105,7 +107,7 @@ if __name__ == "__main__":
     print(" ->", bins)
 
     bigsim = litho.PatchSim(litho.LithoSim(), sizeX=1200, sizeY=1600, scale=SCALE)
-    crops, coords = cropSegments(linked, layer=11, dbu=1e-3, sizeX=1200, sizeY=1600, strideX=570, strideY=700)
+    crops, coords = cropSegments(linked, layer=11, dbu=1e-3, sizeX=1200, sizeY=1600, strideX=570, strideY=700, fromzero=True)
     bignom, bigmax, bigmin, origin = bigsim.simulate(crops, coords, batchsize=BATCHSIZE)
     
     valids, lefts, rights, ups, downs = bigsim.validate(refsEPE, origin)
@@ -121,7 +123,7 @@ if __name__ == "__main__":
     for step in range(STEPS): 
         print(f"Step {step}")
         timePart = time.time()
-        crops, coords = cropSegments(linked, layer=11, dbu=1e-3, sizeX=1200, sizeY=1600, strideX=570, strideY=700)
+        crops, coords = cropSegments(linked, layer=11, dbu=1e-3, sizeX=1200, sizeY=1600, strideX=570, strideY=700, fromzero=True)
         timePart = time.time() - timePart
         timePartAll += timePart
         
@@ -152,21 +154,21 @@ if __name__ == "__main__":
         for idx, elems in enumerate(flattened): 
             assert hmoves[idx] == 0 or vmoves[idx] == 0
             # if hmoves[idx] != 0: 
-            #     flattened[idx][0] = (flattened[idx][0][0] + round(STEPSIZE * hmoves[idx]), flattened[idx][0][1])
-            #     flattened[idx][1] = (flattened[idx][1][0] + round(STEPSIZE * hmoves[idx]), flattened[idx][1][1])
+            #     flattened[idx][0] = (flattened[idx][0][0] + round(stepsize * hmoves[idx]), flattened[idx][0][1])
+            #     flattened[idx][1] = (flattened[idx][1][0] + round(stepsize * hmoves[idx]), flattened[idx][1][1])
             # if vmoves[idx] != 0: 
-            #     flattened[idx][0] = (flattened[idx][0][0], flattened[idx][0][1] + round(STEPSIZE * vmoves[idx]))
-            #     flattened[idx][1] = (flattened[idx][1][0], flattened[idx][1][1] + round(STEPSIZE * vmoves[idx]))
+            #     flattened[idx][0] = (flattened[idx][0][0], flattened[idx][0][1] + round(stepsize * vmoves[idx]))
+            #     flattened[idx][1] = (flattened[idx][1][0], flattened[idx][1][1] + round(stepsize * vmoves[idx]))
             if hmoves[idx] != 0: 
-                node0 = (flattened[idx][0][0] + round(STEPSIZE * hmoves[idx]), flattened[idx][0][1])
-                node1 = (flattened[idx][1][0] + round(STEPSIZE * hmoves[idx]), flattened[idx][1][1])
+                node0 = (flattened[idx][0][0] + round(stepsize * hmoves[idx]), flattened[idx][0][1])
+                node1 = (flattened[idx][1][0] + round(stepsize * hmoves[idx]), flattened[idx][1][1])
                 if abs(node0[0] - reference[idx][0][0]) <= MAXDIST: 
                     flattened[idx][0] = node0
                 if abs(node1[0] - reference[idx][1][0]) <= MAXDIST: 
                     flattened[idx][1] = node1
             if vmoves[idx] != 0: 
-                node0 = (flattened[idx][0][0], flattened[idx][0][1] + round(STEPSIZE * vmoves[idx]))
-                node1 = (flattened[idx][1][0], flattened[idx][1][1] + round(STEPSIZE * vmoves[idx]))
+                node0 = (flattened[idx][0][0], flattened[idx][0][1] + round(stepsize * vmoves[idx]))
+                node1 = (flattened[idx][1][0], flattened[idx][1][1] + round(stepsize * vmoves[idx]))
                 if abs(node0[1] - reference[idx][0][1]) <= MAXDIST: 
                     flattened[idx][0] = node0
                 if abs(node1[1] - reference[idx][1][1]) <= MAXDIST: 
@@ -180,7 +182,7 @@ if __name__ == "__main__":
             bigminBest = bigmin
 
         if step > 0 and step % DECAY == 0: 
-            STEPSIZE /= 2
+            stepsize /= 2
 
     epe, viosAll, hmoves, vmoves = bigsim.checkEPE(reference, bignomBest, origin, distance=16, details=True)
     print(f"Final -> Fine-grained EPE violations: {epe}, {len(hmoves)}, {len(vmoves)}, {np.sum(hmoves!=0)+np.sum(vmoves!=0)}")
@@ -198,4 +200,12 @@ if __name__ == "__main__":
     cv2.imwrite(f"tmp/{basename}_origin.png", np.flip(origin*255, axis=0))
     cv2.imwrite(f"tmp/{basename}_modified.png", np.flip(modified*255, axis=0))
     cv2.imwrite(f"tmp/{basename}_simed.png", np.flip(bignom*255, axis=0))
-    
+
+
+'''
+Final -> Fine-grained EPE violations: 23542, 194937, 194937, 23489
+EPE violations: 23542=7514+16034/383541/389874
+Final -> Coarse-grained EPE violations: 23542
+Final -> L2: 452295.906; PVB: 145118.938
+Runtime -> Segmentation: 1.373 s; Partition: 29.795 s; Simulation+Combination: 50.358 s; Moving: 3.726 s
+'''

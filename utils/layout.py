@@ -221,7 +221,7 @@ def yieldShapes(infile, layer, fromX, fromY, toX, toY, anchor="min", verbose=Tru
         if len(polygons) > 0: 
             yield polygons, coords
 
-def yieldCrops(infile, layer, sizeX, sizeY, strideX, strideY, offsetX=0, offsetY=0, verbose=True): # unit: nm
+def yieldCrops(infile, layer, sizeX, sizeY, strideX, strideY, offsetX=0, offsetY=0, fromzero=True, verbose=True): # unit: nm
     ly = infile
     bbox = ly.top_cell().bbox()
     topcell = ly.top_cell().cell_index()
@@ -230,6 +230,9 @@ def yieldCrops(infile, layer, sizeX, sizeY, strideX, strideY, offsetX=0, offsetY
     bottom = bbox.bottom
     right = bbox.right
     top = bbox.top
+    if fromzero: 
+        left = max(0, left)
+        bottom = max(0, bottom)
     if verbose: 
         print(f"Bounding box: {bbox}, selected layer: {layer}")
         
@@ -270,8 +273,8 @@ def yieldCrops(infile, layer, sizeX, sizeY, strideX, strideY, offsetX=0, offsetY
                 yield polygons, (round(idx/scale), round(jdx/scale))
 
 
-def getCrops(infile, layer, sizeX, sizeY, strideX, strideY, offsetX=0, offsetY=0, maxnum=None, verbose=True): # unit: nm
-    iterator = yieldCrops(infile, layer, sizeX, sizeY, strideX, strideY, offsetX=offsetX, offsetY=offsetY, verbose=verbose)
+def getCrops(infile, layer, sizeX, sizeY, strideX, strideY, offsetX=0, offsetY=0, maxnum=None, fromzero=True, verbose=True): # unit: nm
+    iterator = yieldCrops(infile, layer, sizeX, sizeY, strideX, strideY, offsetX=offsetX, offsetY=offsetY, fromzero=fromzero, verbose=verbose)
     images = []
     coords = []
     for datum, (x, y) in iterator: 

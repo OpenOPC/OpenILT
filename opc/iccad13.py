@@ -308,13 +308,24 @@ class PatchSim:
             coord0b = min(coord0a + patches[idx].shape[0], concated.shape[0])
             coord1b = min(coord1a + patches[idx].shape[1], concated.shape[1])
             masked = torch.zeros_like(patches[idx])
-            valid0 = round(patches[idx].shape[0] * 0.2) if coord0b < max0 else 0
-            valid1 = round(patches[idx].shape[1] * 0.2) if coord1b < max1 else 0
-            masked[valid0:-valid0, valid1:-valid1] = 1
-            # print(f"({coord0a,coord0b}), ({coord1a,coord1b})", patches[idx].shape)
+            valid0 = round(patches[idx].shape[0] * 0.25)
+            valid1 = round(patches[idx].shape[1] * 0.25)
+            if coord0a == 0 and coord1a == 0: 
+                masked[:, :] = 1
+            elif coord0a == 0: 
+                masked[:, valid1:-valid1] = 1
+            elif coord1a == 0: 
+                masked[valid0:-valid0, :] = 1
+            else: 
+                masked[valid0:-valid0, valid1:-valid1] = 1
+            coord0a = max(coord0a, 0)
+            coord1a = max(coord1a, 0)
+            start0 = max(-coord0a, 0)
+            start1 = max(-coord1a, 0)
             size0 = coord0b - coord0a
             size1 = coord1b - coord1a
-            concated[coord0a:coord0b, coord1a:coord1b] += (patches[idx] * masked)[:size0, :size1]
+            # print(concated.shape, patches[idx].shape, masked.shape, coord0a, coord0b, start0, size0, coord1a, coord1b, start1, size1)
+            concated[coord0a:coord0b, coord1a:coord1b] += (patches[idx] * masked)[start0:size0, start1:size1]
             counts[coord0a:coord0b, coord1a:coord1b] += (torch.ones_like(patches[idx]) * masked)[:size0, :size1]
         counts[counts <= 1e-3] = 1e-3
         concated = concated / counts
