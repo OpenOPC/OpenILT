@@ -1,0 +1,40 @@
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+from .Scaling import GradScalerBase, get_objectives_num
+from .build import META_SCALER_REGISTRY
+from mtilt.config import configurable, CfgNode
+
+@META_SCALER_REGISTRY.register()
+class UW(GradScalerBase):
+    r"""Geometric Loss Strategy (GLS).
+
+      This method is proposed in `MultiNet++: Multi-Stream Feature Aggregation and Geometric Loss Strategy for Multi-Task Learning (CVPR 2019 workshop) <https://openaccess.thecvf.com/content_CVPRW_2019/papers/WAD/Chennupati_MultiNet_Multi-Stream_Feature_Aggregation_and_Geometric_Loss_Strategy_for_Multi-Task_CVPRW_2019_paper.pdf>`_ \
+      and implemented by us.
+
+      """
+
+    @configurable
+    def __init__(
+            self,
+            config: CfgNode,
+            params: torch.Tensor,
+    ):
+        super().__init__(config, params)
+
+
+    @classmethod
+    def from_config(cls, cfg):
+
+        return {
+            "config": cfg
+        }
+
+    @get_objectives_num
+    def backward(self, losses, **kwargs):
+        loss_data = torch.stack(losses)
+        self.loss_scale = torch.tensor([-0.5] * self.task_num, device=self.device)
+        loss = (loss_data/(2*self.loss_scale.exp())+self.loss_scale/2).sum()
+        loss.backward()
+        return (1/(2*torch.exp(self.loss_scale))).detach().cpu().numpy()

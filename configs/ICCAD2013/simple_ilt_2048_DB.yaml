@@ -1,0 +1,11 @@
+_BASE_: "./base_simple_ilt_2048.yaml"
+
+ALGORITHM:
+  NAME: "GeneralAlgorithm"
+  OPTIMIZER: "SGD"
+  MULTI_TASK_LEARNING:
+    MTL: True
+    SAVE_GRAD: True
+    SCALER: "DB"
+
+OUTPUT_DIR: "exps/simpleilt_db_2048"
