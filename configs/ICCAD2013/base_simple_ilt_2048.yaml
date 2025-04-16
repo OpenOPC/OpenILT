@@ -1,0 +1,27 @@
+SOLVER:
+  META_SOLVER: "AtomicSolver"
+  MAX_ITER: 20
+  SIGMOID_STEEPNESS: 4.0
+
+INITIALIZER:
+  NAME: "PixelInitializer"
+  TYPE: "pixel"
+
+ALGORITHM:
+  NAME: "GeneralAlgorithm"
+  OPTIMIZER: "SGD"
+
+LITHO_OPERATOR:
+  NAME: "BasicLithoSim"
+  KERNEL_NUM: 24
+  PRINT_THRESH: 0.5
+  PRINT_STEEPNESS: 50.0
+  DOSE_NOM: 1.0
+  DOSE_MIN: 0.98
+  DOSE_MAX: 1.02
+  LOSS:
+    OBJECTIVES: "BasicObjecitvesDict"
+    L2_LOSS: "MSE_Loss"
+    PVB_L2_LOSS: "MSE_Loss"
+
+OUTPUT_DIR: "exps/simpleilt_2048"

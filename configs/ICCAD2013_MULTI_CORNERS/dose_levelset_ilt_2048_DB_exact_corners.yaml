@@ -1,0 +1,18 @@
+_BASE_: "./dose_base_levelset_ilt_2048_exactmodel_corners.yaml"
+
+TRAINER:
+  BASE_LR: 0.5
+
+SOLVER:
+  WEIGHT_L2: 0.3
+
+ALGORITHM:
+  NAME: "GeneralAlgorithm"
+  OPTIMIZER: "SGD"
+  MULTI_TASK_LEARNING:
+    MTL: True
+    SAVE_GRAD: False
+    SAVE_GRAD_ORDER: 0
+    SCALER: "DB"
+
+OUTPUT_DIR: "exps/5dose_levelset_db_2048_exact_corners_l2weight_0.3"

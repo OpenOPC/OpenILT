@@ -1,6 +1,6 @@
-# PVILT
+# MTILT
 
-`PVILT` is an open-source library built on [OpenILT](https://github.com/OpenOPC/OpenILT/tree/main) for inverse lithography technology (ILT) research. Apart from the basic ILT optimization, this library also comes equipped with various multi-objectives optimization (MOO) methods. For more details, please refer to [Introductions](./Docs/introductions.md) and [API instructions](./Docs/API_Documentation.md). To better understand and use this repo code, we recommend you refer to the [file description](./Docs/structure.md).  
+`MTILT` is an open-source library built on [detectron2](https://detectron2.readthedocs.io/en/latest/index.html) and [OpenILT](https://github.com/OpenOPC/OpenILT/tree/main) for inverse lithography technology (ILT) research. Apart from the basic ILT optimization, this library also comes equipped with various multi-objectives optimization (MOO) methods. For more details, please refer to [Introductions](introductions.md) and [API instructions](API_Documentation.md). To better understand and use this repo code, we recommend you refer to the [file description](structure.md).  
 
 ## Installation
 
@@ -42,7 +42,7 @@ We maintain consistency with [detectron2](https://detectron2.readthedocs.io/en/l
 ### Optimize mask
 
 
-We follow a *one-vs-one* styled process, as exemplified by the 'One configuration file--vs--One ILT experiment'. If not necessary, there is no need for you to understand or modify the source code. You can simply create your own configuration file based on your requirements or use a predefined one. Then, with a single click run, you can obtain the optimized mask. The following provides a simple example to explain the usage of the configuration file. If you want to learn more about the configuration file, please refer to [Config-README](./Docs/config.md).
+We follow a *one-vs-one* styled process, as exemplified by the 'One configuration file--vs--One ILT experiment'. If not necessary, there is no need for you to understand or modify the source code. You can simply create your own configuration file based on your requirements or use a predefined one. Then, with a single click run, you can obtain the optimized mask. The following provides a simple example to explain the usage of the configuration file. If you want to learn more about the configuration file, please refer to [Config-README](config.md).
 
 1. Chose a pre-defined configuration file, for example, 
 [`base_simple_ilt_2048.yaml`](configs/ICCAD2013/base_simple_ilt_2048.yaml). 
@@ -57,7 +57,7 @@ CUDA_VISIBLE_DEVICES=0 python tools/solve.py \
 
 ### Chose Smit litho simulator
 
-This repository contains two lithography simulators, namely [ICCAD13](./mtilt/solving/litho_operator/generalized_litho_operator.py#L190) and [GWX](./mtilt/solving/litho_operator/smit_litho_operator.py). The default simulator is the former. You can choose to switch between the two simulators to complete ILT tasks. The following explains how to switch to the GWX SMIT simulator (in fact, due to current simulator version issues, the current code version cannot correctly integrate the simulator into the ILT process, but you can test some basic scripts).
+This repository contains two lithography simulators, namely [ICCAD13](./mtilt/solving/litho_operator/generalized_litho_operator.py#L190) and [GWX](../mtilt/solving/litho_operator/smit_litho_operator.py). The default simulator is the former. You can choose to switch between the two simulators to complete ILT tasks. The following explains how to switch to the GWX SMIT simulator (in fact, due to current simulator version issues, the current code version cannot correctly integrate the simulator into the ILT process, but you can test some basic scripts).
 
 1. Before running programs, you need to modify the corresponding environment variables (try to keep your Python version as 3.8.0 and PyTorch version as 1.8.0, otherwise there may be unknown errors in the environment)::
 ```shell
@@ -67,7 +67,7 @@ export SMITLMD_LICENSE_FILE=55613@localhost.localdomain
 ```
 
 2. Run the basic script for testing the SMIT simulator.
-For this test part, please refer to [README](./mtilt/solving/litho_operator/smit/README.md)
+For this test part, please refer to [README](../mtilt/solving/litho_operator/smit/README.md)
 
 
 ## Experiments
@@ -90,7 +90,7 @@ Only the center 1024 x 1024 pixels are valid.
 | M1_test10    | 47364   | 64915  | 2       |  -1    |
 | Average      | 35814   | 48129  | **6.6** |  -1    |
 
-### + PVILT ([DB](configs/ICCAD2013/simple_ilt_2048_DB.yaml))
+### + MOO ([DB](configs/ICCAD2013/simple_ilt_2048_DB.yaml))
 |   Testcase   | L2 loss   | PVBand    | EPE |  Shots  |
 |--------------|-----------|-----------|-----|---------|
 | M1_test1     | 15529     | 25573     | 2   |  -1    |
@@ -111,13 +111,13 @@ Only the center 1024 x 1024 pixels are valid.
 ### Baseline ILT method
 
 <div align="center">
-<img src="./imgs/pixel_simpleilt.png" title="framwork" height="224" width="224">
+<img src="../imgs/pixel_simpleilt.png" title="framwork" height="224" width="224">
 </div>
 
 ### + MOO ([DB](configs/ICCAD2013/simple_ilt_2048_DB.yaml))
 
 <div align="center">
-<img src="./imgs/pixel_db.png" title="framwork" height="224" width="224">
+<img src="../imgs/pixel_db.png" title="framwork" height="224" width="224">
 </div>
 
 
@@ -125,7 +125,7 @@ Only the center 1024 x 1024 pixels are valid.
 
 1. ~~integrate smit simulator into ILT process~~.
 2. evaluation metrics, e.g., NILS, ~~process window~~.
-3. visualization of different metrics, e.g., ~~process window~~.
+3. visualization of different metrics, e.g., process window.
 
 ## Acknowledgements
 
